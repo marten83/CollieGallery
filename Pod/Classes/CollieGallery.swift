@@ -255,10 +255,10 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
             let image = UIImage(named: customImageName) {
             closeButton.setImage(image, for: UIControlState())
         } else {
-            closeButton.setTitle("+", for: UIControlState())
-            closeButton.titleLabel!.font = UIFont(name: "HelveticaNeue-Medium", size: 30)
+            closeButton.setTitle("", for: UIControlState())
+            closeButton.titleLabel!.font = UIFont(name: "simple-line-icons", size: 40)
             closeButton.setTitleColor(theme.closeButtonColor, for: UIControlState())
-            closeButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
+            //closeButton.transform = CGAffineTransform(rotationAngle: (CGFloat(Double.pi) * 2))
         }
         closeButton.addTarget(self, action: #selector(closeButtonTouched), for: .touchUpInside)
         
@@ -273,7 +273,7 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
         
         self.closeButton = closeButton
         
-        view.addSubview(self.closeButton)
+        //view.addSubview(self.closeButton)
     }
     
     fileprivate func setupActionButton() {
@@ -285,16 +285,16 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
         let closeButtonFrame = getActionButtonFrame(avaiableSize)
         
         let actionButton = UIButton(frame: closeButtonFrame)
-        if let customImageName = options.customOptionsImageName,
+        if let customImageName = options.customCloseImageName,
             let image = UIImage(named: customImageName) {
-            closeButton.setImage(image, for: UIControlState())
+            actionButton.setImage(image, for: UIControlState())
         } else {
-            actionButton.setTitle("•••", for: UIControlState())
-            actionButton.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
+            actionButton.setTitle("", for: UIControlState())
+            actionButton.titleLabel!.font = UIFont(name: "simple-line-icons", size: 30)
             actionButton.setTitleColor(theme.closeButtonColor, for: UIControlState())
         }
         
-        actionButton.addTarget(self, action: #selector(actionButtonTouched), for: .touchUpInside)
+        actionButton.addTarget(self, action: #selector(closeButtonTouched), for: .touchUpInside)
         
         
         var shouldBeHidden = false
@@ -309,6 +309,39 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
         self.actionButton = actionButton
         
         view.addSubview(actionButton)
+        
+        /*if self.closeButton != nil {
+            self.closeButton.removeFromSuperview()
+        }
+        
+        let avaiableSize = getInitialAvaiableSize()
+        let closeButtonFrame = getCloseButtonFrame(avaiableSize)
+        
+        
+        let closeButton = UIButton(frame: closeButtonFrame)
+        if let customImageName = options.customCloseImageName,
+            let image = UIImage(named: customImageName) {
+            closeButton.setImage(image, for: UIControlState())
+        } else {
+            closeButton.setTitle("", for: UIControlState())
+            closeButton.titleLabel!.font = UIFont(name: "simple-line-icons", size: 30)
+            closeButton.setTitleColor(theme.closeButtonColor, for: UIControlState())
+            //closeButton.transform = CGAffineTransform(rotationAngle: (CGFloat(Double.pi) * 2))
+        }
+        closeButton.addTarget(self, action: #selector(closeButtonTouched), for: .touchUpInside)
+        
+        var shouldBeHidden = false
+        
+        if self.closeButton != nil {
+            shouldBeHidden = closeButton.isHidden
+        }
+        
+        closeButton.isHidden = shouldBeHidden
+        
+        
+        self.closeButton = closeButton
+        
+        view.addSubview(self.closeButton)*/
     }
     
     fileprivate func setupProgressIndicator() {

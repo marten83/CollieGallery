@@ -36,8 +36,7 @@ open class CollieGalleryCaptionView: UIView {
     /// Toggle the visibility and adjusts the view size
     open func adjustView() {
         isExpanded = false
-        captionLabel.numberOfLines = 1
-        
+        captionLabel.numberOfLines = 20
         isHidden = titleLabel.text == nil && captionLabel.text == nil
         
         adjustViewSize()
@@ -52,17 +51,16 @@ open class CollieGalleryCaptionView: UIView {
         backgroundColor = UIColor(white: 0.0, alpha: 0.7)
         
         titleLabel = UILabel()
-        titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
+        titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 0)
         titleLabel.textColor = UIColor.white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.isUserInteractionEnabled = false
-        
         addSubview(titleLabel)
         
         captionLabel = UILabel()
-        captionLabel.font = UIFont(name: "HelveticaNeue", size: 13)
-        captionLabel.textColor = UIColor.gray
-        captionLabel.numberOfLines = 1
+        captionLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        captionLabel.textColor = UIColor.white
+        captionLabel.numberOfLines = 20
         captionLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
         captionLabel.translatesAutoresizingMaskIntoConstraints = false
         captionLabel.isUserInteractionEnabled = false
@@ -79,7 +77,7 @@ open class CollieGalleryCaptionView: UIView {
         
         NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.topMargin, multiplier: 1.0, constant: 5.0).isActive = true
         
-        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 25).isActive = true
+        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0).isActive = true
         
         NSLayoutConstraint(item: captionLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: titleLabel, attribute: NSLayoutAttribute.bottomMargin, multiplier: 1.0, constant: 10.0).isActive = true
         
