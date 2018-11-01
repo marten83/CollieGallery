@@ -133,7 +133,8 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
         super.viewWillAppear(animated)
         
         if !UIApplication.shared.isStatusBarHidden {
-            UIApplication.shared.setStatusBarHidden(true, with: UIStatusBarAnimation.slide)
+            let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+            statusBar.isHidden = true
         }
         
         pagingScrollView.delegate = self
