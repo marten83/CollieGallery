@@ -191,7 +191,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
         var newZoomScale = scrollView.minimumZoomScale
         
         if scrollView.zoomScale < (scrollView.maximumZoomScale / 2) {
-            newZoomScale = options.maximumZoomScale
+            newZoomScale = (options.maximumZoomScale / 2)
         }
         
         zoomToScale(newZoomScale, pointInView: pointInView)
