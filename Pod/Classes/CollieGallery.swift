@@ -132,8 +132,7 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //UIApplication.shared.isStatusBarHidden = true
-        UIApplication.shared.setStatusBarHidden(false, with: .slide)
+        UIApplication.shared.isStatusBarHidden = true
         
         pagingScrollView.delegate = self
         scrollToIndex(options.openAtIndex, animated: false)
@@ -155,8 +154,7 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        //UIApplication.shared.isStatusBarHidden = false
-        UIApplication.shared.setStatusBarHidden(false, with: .slide)
+        UIApplication.shared.isStatusBarHidden = false
         
         pagingScrollView.delegate = nil
     }
