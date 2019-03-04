@@ -17,14 +17,14 @@ open class CollieGalleryCustomAction: UIActivity {
     
     /**
      
-        Default initializer to create a custom action
-
-        - Parameters:
-            - title: The title
-            - imageName: The image that will be displayed with the action
-            - performAction: The action that should be performed when tapped
-
-    */
+     Default initializer to create a custom action
+     
+     - Parameters:
+     - title: The title
+     - imageName: The image that will be displayed with the action
+     - performAction: The action that should be performed when tapped
+     
+     */
     public init(title: String, imageName: String, performAction: @escaping (() -> ()) ) {
         self.activityName = title
         self.activityImageName = imageName
@@ -33,8 +33,8 @@ open class CollieGalleryCustomAction: UIActivity {
         super.init()
     }
     
-    override open var activityType : UIActivityType? {
-        return UIActivityType(rawValue: customActivityType)
+    override open var activityType : UIActivity.ActivityType? {
+        return UIActivity.ActivityType(rawValue: customActivityType)
     }
     
     override open var activityTitle : String? {
@@ -61,3 +61,4 @@ open class CollieGalleryCustomAction: UIActivity {
         customActionWhenTapped()
     }
 }
+

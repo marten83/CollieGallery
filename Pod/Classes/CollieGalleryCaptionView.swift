@@ -25,7 +25,7 @@ open class CollieGalleryCaptionView: UIView {
         setupGestures()
         setupView()
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -71,23 +71,23 @@ open class CollieGalleryCaptionView: UIView {
     }
     
     fileprivate func addLayoutConstraints() {
-        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.leadingMargin, multiplier: 1.0, constant: 5.0).isActive = true
+        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.leadingMargin, multiplier: 1.0, constant: 5.0).isActive = true
         
-        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.trailingMargin, multiplier: 1.0, constant: -5.0).isActive = true
+        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.trailingMargin, multiplier: 1.0, constant: -5.0).isActive = true
         
-        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.topMargin, multiplier: 1.0, constant: 5.0).isActive = true
+        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.topMargin, multiplier: 1.0, constant: 5.0).isActive = true
         
-        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: titleLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: captionLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: titleLabel, attribute: NSLayoutAttribute.bottomMargin, multiplier: 1.0, constant: 10.0).isActive = true
+        NSLayoutConstraint(item: captionLabel, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: titleLabel, attribute: NSLayoutConstraint.Attribute.bottomMargin, multiplier: 1.0, constant: 10.0).isActive = true
         
-        NSLayoutConstraint(item: captionLabel, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.leadingMargin, multiplier: 1.0, constant: 5.0).isActive = true
+        NSLayoutConstraint(item: captionLabel, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.leadingMargin, multiplier: 1.0, constant: 5.0).isActive = true
         
-        NSLayoutConstraint(item: captionLabel, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.trailingMargin, multiplier: 1.0, constant: -5.0).isActive = true
+        NSLayoutConstraint(item: captionLabel, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.trailingMargin, multiplier: 1.0, constant: -5.0).isActive = true
     }
     
     /// Called when the caption view is tapped
-    func viewTapped(_ recognizer: UITapGestureRecognizer) {
+    @objc func viewTapped(_ recognizer: UITapGestureRecognizer) {
         if !isExpanded {
             isExpanded = true
             captionLabel.numberOfLines = 0
@@ -103,15 +103,16 @@ open class CollieGalleryCaptionView: UIView {
         captionLabel.sizeToFit()
         let screenSize = UIScreen.main.bounds.size
         let contentSize: CGFloat = titleLabel.frame.size.height
-                                        + captionLabel.frame.size.height + 30.0
+            + captionLabel.frame.size.height + 30.0
         UIView.animate(withDuration: 0.5, delay: 0.0,
-                                   options: UIViewAnimationOptions(),
-                                   animations: { [weak self] in
-                                        guard let this = self else { return }
-                                        this.frame = CGRect(x: this.frame.origin.x,
-                                                                y: screenSize.height - contentSize,
-                                                                width: screenSize.width,
-                                                                height: contentSize);
+                       options: UIView.AnimationOptions(),
+                       animations: { [weak self] in
+                        guard let this = self else { return }
+                        this.frame = CGRect(x: this.frame.origin.x,
+                                            y: screenSize.height - contentSize,
+                                            width: screenSize.width,
+                                            height: contentSize);
         }) { _ in}
     }
 }
+

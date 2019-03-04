@@ -27,7 +27,7 @@ import UIKit
 open class CollieGalleryOptions: NSObject {
     
     /// Shared options between all new instances of the gallery
-    open static var sharedOptions = CollieGalleryOptions()
+    public static var sharedOptions = CollieGalleryOptions()
     
     /// The amount of the parallax effect from 0 to 1
     open var parallaxFactor: CGFloat = 0.2
@@ -52,7 +52,7 @@ open class CollieGalleryOptions: NSObject {
     
     /// Open gallery at specified page
     open var openAtIndex: Int = 0
-
+    
     /// Custom close button image name
     open var customCloseImageName: String? = nil
     
@@ -72,5 +72,5 @@ open class CollieGalleryOptions: NSObject {
     open var customActions: [CollieGalleryCustomAction] = []
     
     /// Default actions to exclude from the gallery actions (UIActivityType Constants)
-    open var excludedActions: [UIActivityType] = []
+    open var excludedActions: [UIActivity.ActivityType] = []
 }

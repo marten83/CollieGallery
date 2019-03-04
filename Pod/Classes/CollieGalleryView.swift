@@ -51,7 +51,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-
+    
     convenience init(picture: CollieGalleryPicture, frame: CGRect,
                      options: CollieGalleryOptions, theme: CollieGalleryTheme)
     {
@@ -68,7 +68,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     // MARK: - Private functions
     fileprivate func setupView() {
         backgroundColor = UIColor.clear
@@ -77,7 +77,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
         setupImageView()
         setupActivityIndicatorView()
     }
-
+    
     fileprivate func setupScrollView() {
         scrollView = UIScrollView(frame: scrollFrame)
         scrollView.delegate = self
@@ -88,7 +88,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = options.maximumZoomScale
-        scrollView.decelerationRate = UIScrollViewDecelerationRateFast
+        scrollView.decelerationRate = UIScrollView.DecelerationRate.fast
         scrollView.backgroundColor = UIColor.clear
         isUserInteractionEnabled = options.enableZoom
         
@@ -97,7 +97,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
     
     fileprivate func setupImageView() {
         imageView = UIImageView(frame: scrollFrame)
-        imageView.contentMode = UIViewContentMode.scaleToFill
+        imageView.contentMode = UIView.ContentMode.scaleToFill
         imageView.backgroundColor = UIColor.clear
         
         scrollView.addSubview(imageView)
@@ -109,10 +109,10 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
         activityIndicator.center = imageView.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = theme.progressIndicatorColor
-
+        
         addSubview(activityIndicator)
     }
-
+    
     fileprivate func setupGestures() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(CollieGalleryView.viewTapped(_:)))
         tapRecognizer.numberOfTapsRequired = 1
@@ -144,7 +144,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
         
         scrollView.zoom(to: rectToZoomTo, animated: true)
     }
-
+    
     fileprivate func centerImageViewToSuperView() {
         var zoomFrame = imageView.frame
         
@@ -196,7 +196,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
         
         zoomToScale(newZoomScale, pointInView: pointInView)
     }
-
+    
     func restoreZoom(_ animated: Bool = true) {
         if animated {
             zoomToScale(scrollView.minimumZoomScale, pointInView: CGPoint.zero)
@@ -226,16 +226,16 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
                                                         queue: mainQueue,
                                                         completionHandler:
                     { [weak self] response, data, error in
-                    if error == nil {
-                        let image = UIImage(data: data!)!
-                        
-                        DispatchQueue.main.async(execute: {
-                            self?.imageView.image = image
-                            self?.updateImageViewSize()
+                        if error == nil {
+                            let image = UIImage(data: data!)!
                             
-                            self?.activityIndicator.stopAnimating()
-                        })
-                    }
+                            DispatchQueue.main.async(execute: {
+                                self?.imageView.image = image
+                                self?.updateImageViewSize()
+                                
+                                self?.activityIndicator.stopAnimating()
+                            })
+                        }
                 })
             }
         }
@@ -244,7 +244,7 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
     func clearImage() {
         imageView.image = nil
     }
-
+    
     
     // MARK: - UIView methods
     override func layoutSubviews() {
@@ -256,15 +256,15 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
     
     
     // MARK: - UIGestureRecognizer handlers
-    func viewPressed(_ recognizer: UILongPressGestureRecognizer) {
-        if (recognizer.state == UIGestureRecognizerState.began) {
+    @objc func viewPressed(_ recognizer: UILongPressGestureRecognizer) {
+        if (recognizer.state == UIGestureRecognizer.State.began) {
             if let delegate = delegate {
                 delegate.galleryViewPressed(self)
             }
         }
     }
     
-    func viewTapped(_ recognizer: UITapGestureRecognizer) {
+    @objc func viewTapped(_ recognizer: UITapGestureRecognizer) {
         if scrollView.zoomScale > scrollView.minimumZoomScale {
             restoreZoom()
             
@@ -274,8 +274,8 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
             delegate.galleryViewTapped(self)
         }
     }
-
-    func viewDoubleTapped(_ recognizer: UITapGestureRecognizer) {
+    
+    @objc func viewDoubleTapped(_ recognizer: UITapGestureRecognizer) {
         let pointInView = recognizer.location(in: imageView)
         zoomToPoint(pointInView)
     }
@@ -285,12 +285,12 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
-
+    
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if (scrollView.zoomScale > scrollView.maximumZoomScale) {
             scrollView.zoomScale = scrollView.maximumZoomScale
         }
-
+        
         centerImageViewToSuperView()
     }
     
@@ -318,3 +318,4 @@ internal class CollieGalleryView: UIView, UIScrollViewDelegate {
         }
     }
 }
+
