@@ -650,7 +650,9 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
         transitionManager.sourceViewController = sourceViewController
         transitionManager.targetViewController = self
         
-        modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        modalTransitionStyle = .coverVertical
+        modalPresentationStyle = .overFullScreen
+        modalPresentationCapturesStatusBarAppearance = true
         transitioningDelegate = transitionManager
         
         sourceViewController.present(self, animated: type.animated, completion: nil)
