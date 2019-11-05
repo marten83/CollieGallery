@@ -109,10 +109,19 @@ open class CollieGalleryCaptionView: UIView {
                        animations: { [weak self] in
                         guard let this = self else { return }
                         this.frame = CGRect(x: this.frame.origin.x,
-                                            y: screenSize.height - contentSize,
+                                            y: (screenSize.height - contentSize) - this.getBottomPadding(),
                                             width: screenSize.width,
                                             height: contentSize);
         }) { _ in}
+    }
+    
+    fileprivate func getBottomPadding() -> CGFloat{
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            // with notch: 44.0 on iPhone X, XS, XS Max, XR.
+            // without notch: 24.0 on iPad Pro 12.9" 3rd generation, 20.0 on iPhone 8 on iOS 12+.
+            return UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? 0
+        }
+        return 0
     }
 }
 
