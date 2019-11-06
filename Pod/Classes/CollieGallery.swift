@@ -516,7 +516,7 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
     }
     
     fileprivate func getTopPadding() -> CGFloat{
-        if #available(iOS 11.0, tvOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *), UIDevice.current.hasNotch {
             // with notch: 44.0 on iPhone X, XS, XS Max, XR.
             // without notch: 24.0 on iPad Pro 12.9" 3rd generation, 20.0 on iPhone 8 on iOS 12+.
             return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0
@@ -674,5 +674,15 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
         transitioningDelegate = transitionManager
         
         sourceViewController.present(self, animated: type.animated, completion: nil)
+    }
+}
+
+extension UIDevice {
+    var hasNotch: Bool {
+        if #available(iOS 11.0, *) {
+            let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+            return bottom > 0
+        }
+        return false
     }
 }
