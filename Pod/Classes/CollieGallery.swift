@@ -497,7 +497,7 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
     }
     
     fileprivate func getActionButtonFrame(_ avaiableSize: CGSize) -> CGRect {
-        return CGRect(x: avaiableSize.width - 50, y: -20 + getTopPadding(), width: 50, height: 50)
+        return CGRect(x: avaiableSize.width - 50, y: getTopPadding() - 15, width: 50, height: 50)
     }
     
     fileprivate func getCustomButtonFrame(_ avaiableSize: CGSize, forIndex index: Int) -> CGRect {

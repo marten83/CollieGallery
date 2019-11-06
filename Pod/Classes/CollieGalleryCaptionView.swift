@@ -58,7 +58,11 @@ open class CollieGalleryCaptionView: UIView {
         addSubview(titleLabel)
         
         captionLabel = UILabel()
-        captionLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        if (UIFont(name: "LibreFranklin-Regular", size: 15) != nil) {
+            captionLabel.font = UIFont(name: "LibreFranklin-Regular", size: 15)
+        } else {
+            captionLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        }
         captionLabel.textColor = UIColor.white
         captionLabel.numberOfLines = 20
         captionLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
@@ -124,4 +128,3 @@ open class CollieGalleryCaptionView: UIView {
         return 0
     }
 }
-
